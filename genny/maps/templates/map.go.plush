@@ -1,0 +1,46 @@
+package syncx
+
+import (
+	"sync"
+)
+
+type <%= m.Name %>Map struct {
+	data sync.Map
+}
+
+func (m *<%= m.Name %>Map) Delete(key string) {
+	m.data.Delete(key)
+}
+
+func (m *<%= m.Name %>Map) Load(key string) (<%= m.GoType %>, bool) {
+	i, ok := m.data.Load(key)
+	if !ok {
+		return <%= m.A %>, false
+	}
+	s, ok := i.(<%= m.GoType %>)
+	return s, ok
+}
+
+func (m *<%= m.Name %>Map) LoadOrStore(key string, value <%= m.GoType %>) (<%= m.GoType %>, bool) {
+	i, ok := m.data.LoadOrStore(key, value)
+	s, ok := i.(<%= m.GoType %>)
+	return s, ok
+}
+
+func (m *<%= m.Name %>Map) Range(f func(key string, value <%= m.GoType %>) bool) {
+	m.data.Range(func(k, v interface{}) bool {
+		key, ok := k.(string)
+		if !ok {
+			return false
+		}
+		value, ok := v.(<%= m.GoType %>)
+		if !ok {
+			return false
+		}
+		return f(key, value)
+	})
+}
+
+func (m *<%= m.Name %>Map) Store(key string, value <%= m.GoType %>) {
+	m.data.Store(key, value)
+}
