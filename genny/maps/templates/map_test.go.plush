@@ -6,7 +6,10 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/stretchr/testify/require"
+  "github.com/stretchr/testify/require"
+  <%= if (m.Package) { %>
+    "<%= m.Package %>"
+  <% } %>
 )
 
 func Test_<%= m.Name %>Map(t *testing.T) {

@@ -3,7 +3,10 @@
 package syncx
 
 import (
-	"sync"
+  "sync"
+<%= if (m.Package) { %>
+ "<%= m.Package %>"
+<% } %>
 )
 
 // <%= m.Name %>Map wraps sync.Map and uses the following types:

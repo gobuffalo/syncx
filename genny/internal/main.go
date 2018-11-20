@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"log"
+	"os"
 
+	"github.com/BurntSushi/toml"
 	"github.com/gobuffalo/genny"
 	"github.com/gobuffalo/genny/movinglater/gotools"
 	"github.com/gobuffalo/syncx/genny/maps"
@@ -30,7 +32,26 @@ func main() {
 				BB:     `"BB"`,
 				C:      `"C"`,
 			},
+			{
+				Name:    "UUID",
+				GoType:  "uuid.UUID",
+				Package: "github.com/gofrs/uuid",
+				Zero:    `uuid.Nil`,
+				A:       `uuid.Must(uuid.FromString("6ba7b814-9dad-11d1-80b4-00c04fd430c1"))`,
+				B:       `uuid.Must(uuid.FromString("6ba7b814-9dad-11d1-80b4-00c04fd430c2"))`,
+				BB:      `uuid.Must(uuid.FromString("6ba7b814-9dad-11d1-80b4-00c04fd430c3"))`,
+				C:       `uuid.Must(uuid.FromString("6ba7b814-9dad-11d1-80b4-00c04fd430c4"))`,
+			},
 		},
+	}
+
+	err := toml.NewEncoder(os.Stdout).Encode(struct {
+		Maps []maps.Map
+	}{
+		Maps: opts.Maps,
+	})
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	run := genny.WetRunner(context.Background())
