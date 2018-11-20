@@ -3,9 +3,7 @@ package main
 import (
 	"context"
 	"log"
-	"os"
 
-	"github.com/BurntSushi/toml"
 	"github.com/gobuffalo/genny"
 	"github.com/gobuffalo/genny/movinglater/gotools"
 	"github.com/gobuffalo/syncx/genny/maps"
@@ -14,6 +12,15 @@ import (
 func main() {
 	opts := &maps.Options{
 		Maps: []maps.Map{
+			{
+				Name:   "",
+				GoType: "interface{}",
+				Zero:   "nil",
+				A:      "0",
+				B:      "1",
+				BB:     "-1",
+				C:      "2",
+			},
 			{
 				Name:   "Int",
 				GoType: "int",
@@ -45,15 +52,15 @@ func main() {
 		},
 	}
 
-	err := toml.NewEncoder(os.Stdout).Encode(struct {
-		Maps []maps.Map
-	}{
-		Maps: opts.Maps,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	// err := toml.NewEncoder(os.Stdout).Encode(struct {
+	// 	Maps []maps.Map
+	// }{
+	// 	Maps: opts.Maps,
+	// })
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	//
 	run := genny.WetRunner(context.Background())
 
 	gg, err := maps.New(opts)

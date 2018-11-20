@@ -1,8 +1,7 @@
 package maps
 
 import (
-	"strings"
-
+	"github.com/gobuffalo/flect/name"
 	"github.com/gobuffalo/genny"
 	"github.com/gobuffalo/genny/movinglater/plushgen"
 	"github.com/gobuffalo/packr/v2"
@@ -29,7 +28,12 @@ func New(opts *Options) (*genny.Group, error) {
 			if err != nil {
 				return gg, errors.WithStack(err)
 			}
-			g.File(genny.NewFileS(strings.ToLower(string(m.Name))+"_"+n, s))
+			nm := name.New(string(m.Name))
+			if len(m.Name) == 0 {
+				nm = name.New(string(m.GoType))
+			}
+			n = nm.File().String() + "_" + n
+			g.File(genny.NewFileS(n, s))
 		}
 
 		ctx := plush.NewContext()
