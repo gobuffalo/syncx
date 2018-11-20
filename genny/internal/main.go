@@ -15,6 +15,7 @@ func main() {
 			{
 				Name:   "Int",
 				GoType: "int",
+				Zero:   "0",
 				A:      "0",
 				B:      "1",
 				BB:     "-1",
@@ -23,6 +24,7 @@ func main() {
 			{
 				Name:   "String",
 				GoType: "string",
+				Zero:   `""`,
 				A:      `"A"`,
 				B:      `"B"`,
 				BB:     `"BB"`,

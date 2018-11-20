@@ -33,10 +33,9 @@ func Test_<%= m.Name %>Map(t *testing.T) {
 		return true
 	})
 
-	sort.Slice(keys, func(a, b int) bool {
-		return keys[a] < keys[b]
-	})
+	r.Equal(sm.Keys(), keys)
 
+	sm.Delete("b")
 	r.Equal([]string{"a", "b"}, keys)
 
 	sm.Delete("b")

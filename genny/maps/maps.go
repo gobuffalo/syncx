@@ -10,9 +10,11 @@ import (
 	"github.com/pkg/errors"
 )
 
+// New returns a generator capable of making sync.Map
+// implementations
 func New(opts *Options) (*genny.Group, error) {
 	gg := &genny.Group{}
-	box := packr.New("../maps/templates", "../maps/templates")
+	box := packr.New("syncx:genny:maps", "../maps/templates")
 
 	if err := opts.Validate(); err != nil {
 		return gg, errors.WithStack(err)
