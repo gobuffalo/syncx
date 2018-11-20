@@ -38,6 +38,8 @@ func Test_<%= m.Name %>Map(t *testing.T) {
 		return true
 	})
 
+	sort.Strings(keys)
+
 	r.Equal(sm.Keys(), keys)
 
 	sm.Delete("b")

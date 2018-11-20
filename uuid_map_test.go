@@ -3,10 +3,12 @@
 package syncx
 
 import (
+	"sort"
 	"testing"
 
-	"github.com/gofrs/uuid"
 	"github.com/stretchr/testify/require"
+
+	"github.com/gofrs/uuid"
 )
 
 func Test_UUIDMap(t *testing.T) {
@@ -34,6 +36,8 @@ func Test_UUIDMap(t *testing.T) {
 		keys = append(keys, key)
 		return true
 	})
+
+	sort.Strings(keys)
 
 	r.Equal(sm.Keys(), keys)
 

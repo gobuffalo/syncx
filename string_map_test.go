@@ -3,6 +3,7 @@
 package syncx
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -33,6 +34,8 @@ func Test_StringMap(t *testing.T) {
 		keys = append(keys, key)
 		return true
 	})
+
+	sort.Strings(keys)
 
 	r.Equal(sm.Keys(), keys)
 
