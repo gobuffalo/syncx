@@ -14,19 +14,19 @@ func Test_StringMap(t *testing.T) {
 
 	sm := &StringMap{}
 
-	sm.Store("a", "A")
+	sm.Store("a", `A`)
 
 	s, ok := sm.Load("a")
 	r.True(ok)
-	r.Equal("A", s)
+	r.Equal(`A`, s)
 
-	s, ok = sm.LoadOrStore("b", "B")
+	s, ok = sm.LoadOrStore("b", `B`)
 	r.True(ok)
-	r.Equal("B", s)
+	r.Equal(`B`, s)
 
-	s, ok = sm.LoadOrStore("b", "BB")
+	s, ok = sm.LoadOrStore("b", `BB`)
 	r.True(ok)
-	r.Equal("B", s)
+	r.Equal(`B`, s)
 
 	var keys []string
 
@@ -47,9 +47,9 @@ func Test_StringMap(t *testing.T) {
 	r.False(ok)
 
 	func(m *StringMap) {
-		m.Store("c", "C")
+		m.Store("c", `C`)
 	}(sm)
 	s, ok = sm.Load("c")
 	r.True(ok)
-	r.Equal("C", s)
+	r.Equal(`C`, s)
 }

@@ -14,19 +14,19 @@ func Test_ByteMap(t *testing.T) {
 
 	sm := &ByteMap{}
 
-	sm.Store("a", []byte("A"))
+	sm.Store("a", []byte(`A`))
 
 	s, ok := sm.Load("a")
 	r.True(ok)
-	r.Equal([]byte("A"), s)
+	r.Equal([]byte(`A`), s)
 
-	s, ok = sm.LoadOrStore("b", []byte("B"))
+	s, ok = sm.LoadOrStore("b", []byte(`B`))
 	r.True(ok)
-	r.Equal([]byte("B"), s)
+	r.Equal([]byte(`B`), s)
 
-	s, ok = sm.LoadOrStore("b", []byte("BB"))
+	s, ok = sm.LoadOrStore("b", []byte(`BB`))
 	r.True(ok)
-	r.Equal([]byte("B"), s)
+	r.Equal([]byte(`B`), s)
 
 	var keys []string
 
@@ -47,9 +47,9 @@ func Test_ByteMap(t *testing.T) {
 	r.False(ok)
 
 	func(m *ByteMap) {
-		m.Store("c", []byte("C"))
+		m.Store("c", []byte(`C`))
 	}(sm)
 	s, ok = sm.Load("c")
 	r.True(ok)
-	r.Equal([]byte("C"), s)
+	r.Equal([]byte(`C`), s)
 }
