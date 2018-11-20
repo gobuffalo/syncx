@@ -63,7 +63,7 @@ func (m *IntMap) Store(key string, value int) {
 // Keys returns a list of keys in the map
 func (m *IntMap) Keys() []string {
 	var keys []string
-	m.Range(func(key string, value string) bool {
+	m.Range(func(key string, value int) bool {
 		keys = append(keys, key)
 		return true
 	})

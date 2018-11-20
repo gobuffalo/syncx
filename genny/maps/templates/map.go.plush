@@ -62,7 +62,7 @@ func (m *<%= m.Name %>Map) Store(key string, value <%= m.GoType %>) {
 // Keys returns a list of keys in the map
 func (m *<%= m.Name %>Map) Keys() []string {
 	var keys []string
-	m.Range(func(key string, value string) bool {
+	m.Range(func(key string, value <%= m.GoType %>) bool {
 		keys = append(keys, key)
 		return true
 	})
