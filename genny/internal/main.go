@@ -40,6 +40,15 @@ func main() {
 				C:      `"C"`,
 			},
 			{
+				Name:   "Byte",
+				GoType: "[]byte",
+				Zero:   `[]byte("")`,
+				A:      `[]byte("A")`,
+				B:      `[]byte("B")`,
+				BB:     `[]byte("BB")`,
+				C:      `[]byte("C")`,
+			},
+			{
 				Name:    "UUID",
 				GoType:  "uuid.UUID",
 				Package: "github.com/gofrs/uuid",

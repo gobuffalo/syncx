@@ -39,6 +39,11 @@ lint:
 	gometalinter --vendor ./... --deadline=1m --skip=internal
 	make tidy
 
+gen:
+	packr2
+	go run genny/internal/main.go
+	make test
+
 update:
 	$(GO_BIN) get -u -tags ${TAGS}
 	make tidy
